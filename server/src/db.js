@@ -7,6 +7,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 //!Crear modelos
 const CustomerModel = require("./models/customer");
+const OrderModel = require("./models/order");
 
 const sequelize = new Sequelize(
    `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
@@ -39,12 +40,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //!Pasar modelos por sequelize
 CustomerModel(sequelize);
+OrderModel(sequelize);
 
 const {
-  Customer
+  Customer,
+  Order
 } = sequelize.models;
 
 //!relaciones
+Customer.hasMany(Order, { foreignKey: 'customer_id' }); // Esto asocia la columna customer_id en la tabla Order con la tabla Customer.
+Order.belongsTo(Customer, { foreignKey: 'customer_id' }); // Esto establece la relación de que cada Order pertenece a un único Customer.
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
