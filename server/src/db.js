@@ -40,13 +40,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 //!Pasar modelos por sequelize
 
 const {
-  Administrator,
-  Client,
-  Product,
-  Purchase,
-  Collaborator,
   User,
-  Authorizations
+  Product
 } = sequelize.models;
 
 //!relaciones
