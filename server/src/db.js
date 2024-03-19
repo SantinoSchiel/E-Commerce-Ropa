@@ -3,10 +3,10 @@ const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
-
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 //!Crear modelos
+const CustomerModel = require("./models/customer");
 
 const sequelize = new Sequelize(
    `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
@@ -38,10 +38,10 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 //!Pasar modelos por sequelize
+CustomerModel(sequelize);
 
 const {
-  User,
-  Product
+  Customer
 } = sequelize.models;
 
 //!relaciones
