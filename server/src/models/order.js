@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
 const Order = (sequelize) => {
   sequelize.define('order', {
     id: {
@@ -17,7 +16,7 @@ const Order = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    customer_id: {
+    customerId: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: false

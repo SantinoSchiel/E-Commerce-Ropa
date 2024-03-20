@@ -9,7 +9,8 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 const CustomerModel = require("./models/customer");
 const OrderModel = require("./models/order");
 const orderDetailModel = require("./models/orderDetail");
-const productModel = require("./models/Product");
+const productModel = require("./models/product");
+const mercadoPagoModel = require("./models/mercadoPago");
 
 const sequelize = new Sequelize(
   `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
@@ -43,14 +44,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 //!Pasar modelos por sequelize
 CustomerModel(sequelize);
 OrderModel(sequelize);
+orderDetailModel(sequelize);
+productModel(sequelize);
+mercadoPagoModel(sequelize);
 
-const { Customer, Order } = sequelize.models;
+const { Customer, Order, orderDetail, Product, MercadoPago } = sequelize.models;
 
 //!relaciones
-Customer.hasMany(Order, { foreignKey: "customer_id" }); // Esto asocia la columna customer_id en la tabla Order con la tabla Customer.
-Order.belongsTo(Customer, { foreignKey: "customer_id" }); // Esto establece la relación de que cada Order pertenece a un único Customer.
+Customer.hasMany(Order, { foreignKey: "customerId" });
+Order.belongsTo(Customer, { foreignKey: "customerId" });
+
+Order.hasMany(orderDetail);
+orderDetail.belongsTo(Order);
+
+Product.hasMany(orderDetail);
+orderDetail.belongsTo(Product);
+
+MercadoPago.belongsTo(Order);
+Order.hasOne(MercadoPago);
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  ...sequelize.models,
+  conn: sequelize,
 };

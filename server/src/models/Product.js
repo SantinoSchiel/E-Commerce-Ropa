@@ -4,38 +4,35 @@ const product = (sequelize) => {
   sequelize.define(
     "product",
     {
-      product_id: {
-        types: DataTypes.UUID,
+      id: {
+        type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
       name: {
-        types: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.STRING,
+        allowNull: false
       },
       price: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       size: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       color: {
-        types: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.STRING,
+        allowNull: false
       },
       description: {
-        types: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.STRING,
+        allowNull: false
       },
     },
     { timestamps: false }
   );
 };
+
+module.exports = product;
