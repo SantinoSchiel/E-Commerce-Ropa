@@ -27,6 +27,10 @@ const Customer = (sequelize) => {
     adress: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   }, { timestamps: false });
 };
