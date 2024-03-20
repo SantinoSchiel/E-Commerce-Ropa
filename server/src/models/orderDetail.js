@@ -4,33 +4,23 @@ const orderDetail = (sequelize) => {
   sequelize.define(
     "orderDetail",
     {
-      detailId: {
-        types: DataTypes.UUID,
+      id: {
+        type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        primaryKey: true,
-      },
-      orderId: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
-      },
-      product_id: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
+        primaryKey: true
       },
       quantity: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       unitPrice: {
-        types: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: false,
-      },
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
     },
     { timestamps: false }
   );
 };
+
+module.exports = orderDetail;
