@@ -8,21 +8,23 @@ const Customer = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    firstname: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    secondname: {
+    password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     adress: {
       type: DataTypes.STRING,
@@ -31,6 +33,10 @@ const Customer = (sequelize) => {
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
+    },
+    adminId: {
+      type: DataTypes.UUID,
+      allowNull: false
     }
   }, { timestamps: false });
 };
