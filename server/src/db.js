@@ -11,6 +11,7 @@ const OrderModel = require("./models/order");
 const orderDetailModel = require("./models/orderDetail");
 const productModel = require("./models/product");
 const mercadoPagoModel = require("./models/mercadoPago");
+const adminModel = require("./models/admin");
 
 const sequelize = new Sequelize(
   `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
@@ -47,8 +48,9 @@ OrderModel(sequelize);
 orderDetailModel(sequelize);
 productModel(sequelize);
 mercadoPagoModel(sequelize);
+adminModel(sequelize);
 
-const { Customer, Order, orderDetail, Product, MercadoPago } = sequelize.models;
+const { Customer, Order, orderDetail, Product, MercadoPago, Admin } = sequelize.models;
 
 //!relaciones
 Customer.hasMany(Order, { foreignKey: "customerId" });
@@ -62,6 +64,12 @@ orderDetail.belongsTo(Product);
 
 MercadoPago.belongsTo(Order);
 Order.hasOne(MercadoPago);
+
+Admin.hasMany(Product, { foreignKey: 'adminId' });
+Product.belongsTo(Admin, { foreignKey: 'adminId' });
+
+Admin.hasMany(Customer, { foreignKey: 'adminId' });
+Customer.belongsTo(Admin, { foreignKey: 'adminId' });
 
 module.exports = {
   ...sequelize.models,

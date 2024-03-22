@@ -5,7 +5,6 @@ const putCustomerHandler = async (req, res) => {
     const { id } = req.params;
     const newData = req.body;
     const updateProduct = await putCustomer( id, newData );
-    console.log(updateProduct);
     return res.status(201).json(updateProduct);
   } catch (error) {
     return res.status(500).json({ error: error.message });

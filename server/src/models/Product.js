@@ -19,7 +19,7 @@ const product = (sequelize) => {
         allowNull: false
       },
       size: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
       },
       color: {
@@ -30,6 +30,10 @@ const product = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
+      adminId: {
+        type: DataTypes.UUID,
+        allowNull: false
+      }
     },
     { timestamps: false }
   );
