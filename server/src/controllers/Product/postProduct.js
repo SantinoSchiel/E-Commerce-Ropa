@@ -2,7 +2,7 @@ const { Product } = require("../../db");
 
 const postProducts = async function (data) {
 
-    if (!data.name || !data.price || !data.size || !data.color || !data.description) {
+    if (!data.name || !data.price || !data.size || !data.color || !data.description || !data.adminId) {
         throw new Error('Faltan datos obligatorios para crear el producto');
     }
 
@@ -10,7 +10,7 @@ const postProducts = async function (data) {
 
     if (productExistence) return { error: 'El producto ya existe' };
 
-    const newProduct = await Product.create({ name: data.name, price: data.price, size: data.size, color: data.color, description: data.description });
+    const newProduct = await Product.create({ name: data.name, price: data.price, size: data.size, color: data.color, description: data.description, adminId: data.adminId });
 
     return newProduct;
 };

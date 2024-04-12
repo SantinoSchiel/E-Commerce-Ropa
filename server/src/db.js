@@ -59,8 +59,8 @@ Order.belongsTo(Customer, { foreignKey: "customerId" });
 Order.hasMany(orderDetail);
 orderDetail.belongsTo(Order);
 
-Product.hasMany(orderDetail);
-orderDetail.belongsTo(Product);
+orderDetail.belongsToMany(Product, { through: 'OrderDetailProduct' });
+Product.belongsToMany(orderDetail, { through: 'OrderDetailProduct' });
 
 MercadoPago.belongsTo(Order);
 Order.hasOne(MercadoPago);

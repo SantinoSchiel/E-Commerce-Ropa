@@ -15,7 +15,11 @@ const orderDetail = (sequelize) => {
         allowNull: false
       },
       unitPrice: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
+        allowNull: false
+      },
+      productsList: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false
       }
     },
