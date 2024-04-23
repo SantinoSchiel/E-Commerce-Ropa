@@ -2,6 +2,33 @@ const { Router } = require('express');
 
 // Importar todos los routers
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/') // Ruta donde se guardarán las imágenes
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname) // Utiliza el nombre original de la imagen
+    }
+});
+
+const upload = multer({ storage: storage }).array('images', 10);
+
+function uploadMultipleImages(req, res, next) {
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            // Multer ha encontrado un error
+            return res.status(500).json({ error: 'Error al cargar imágenes' });
+        } else if (err) {
+            // Otro tipo de error
+            return res.status(500).json({ error: err.message });
+        }
+        // No hay errores, pasa al siguiente middleware
+        next();
+    });
+}
+
 const postCustomerHandler = require('../handlers/customerHandler/postCustomerhandler');
 const getCustomerHandler = require('../handlers/customerHandler/getCustomerHandler');
 const putCustomerHandler = require('../handlers/customerHandler/putCustomerHandler');
@@ -35,9 +62,9 @@ router.post('/customer', postCustomerHandler);
 router.get('/customer', getCustomerHandler);
 router.put('/customer/:id', putCustomerHandler);
 
-router.post('/product', postProductHandler);
+router.post('/product', uploadMultipleImages, postProductHandler);
 router.get('/product', getProductHandler);
-router.put('/product/:id', putProductHandler);
+router.put('/product/:id', uploadMultipleImages, putProductHandler);
 
 router.post('/create-order', preferenceID);
 router.post('/mercadopago', postMPHandler);

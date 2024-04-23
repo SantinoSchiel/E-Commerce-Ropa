@@ -14,21 +14,25 @@ const product = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
       },
+      images: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: false,
+      },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
       size: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING), // Ahora es un array de strings
         allowNull: false
       },
       color: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
       },
       description: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       adminId: {
         type: DataTypes.UUID,

@@ -9,7 +9,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 const CustomerModel = require("./models/customer");
 const OrderModel = require("./models/order");
 const orderDetailModel = require("./models/orderDetail");
-const productModel = require("./models/product");
+const productModel = require("./models/Product");
 const mercadoPagoModel = require("./models/mercadoPago");
 const adminModel = require("./models/admin");
 

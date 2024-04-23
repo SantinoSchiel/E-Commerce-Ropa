@@ -13,7 +13,8 @@ const Order = (sequelize) => {
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("pendiente", "pagado", "cancelado"),
+      defaultValue: "pendiente",
       allowNull: false,
     },
     customerId: {

@@ -1,0 +1,210 @@
+.mainHeader {
+  background-color: #333; /* Color de fondo del encabezado */
+  color: #fff; /* Color del texto */
+  padding: 0.5rem; /* Espaciado interno */
+  border-radius: 1rem;
+}
+
+.mainHeader li{
+  list-style-type: none;
+}
+  
+.navList {
+  list-style-type: none; /* Quita los estilos de lista predeterminados */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+  margin: 0; /* Elimina el margen predeterminado de la lista */
+  display: inline-block; /* Hace que los botones sean elementos en línea */
+  margin-right: 10px; /* Espaciado entre los botones */
+}
+  
+.navLink {
+  text-decoration: none;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  font-size: 0.8rem;
+  position: relative;
+  display: flex;
+  width: 3.5em;
+  height: 2em;
+}
+
+.switch::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 50px;
+  background-color: #ffffff; /* Fondo blanco */
+  transition: background-color 0.4s ease; /* Transición de color de fondo */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fdfefe; /* Color de fondo del slider */
+  transition: background-color 0.4s ease; /* Transición de color de fondo */
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  left: 0.3em;
+  bottom: 0.35em;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -10px 10px 0px inset,
+    rgba(0, 0, 0, 0.09) 0px -1px 15px -8px;
+  background-color: #000000; /* Color de fondo del punto */
+  transition: transform 0.4s ease; /* Transición de la transformación */
+  transform: translateX(0); /* Posición inicial */
+}
+
+/* Cambiar el color del switch cuando está activo */
+.input__check:checked + .switch::before {
+  background-color: #000000; /* Fondo negro */
+}
+
+/* Cambiar el color del slider cuando está activo */
+.input__check:checked + .slider {
+  background-color: #ffffff; /* Color de fondo del slider cuando está activo */
+}
+
+/* Cambiar el color del punto cuando está activo */
+.input__check:checked + .slider:before {
+  transform: translateX(1.5em); /* Mover el punto hacia la derecha */
+  background-color: #ffffff; /* Color de fondo del punto cuando está activo */
+}
+
+.darkModeToggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button1 {
+  font-weight: bold;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+  width: 4rem;
+  height: 2rem;
+  border: none;
+  background-color: #3653f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.button1 .span1 {
+  display: flex;
+  overflow: hidden;
+}
+
+.button1:hover .span1 {
+  position: absolute;
+}
+
+.button1:hover .span1 span {
+  transform: translateY(1.2em);
+}
+
+.button1 .span1 span:nth-child(1) {
+  transition: 0.2s;
+}
+
+.button1 .span1 span:nth-child(2) {
+  transition: 0.3s;
+}
+
+.button1 .span1 span:nth-child(3) {
+  transition: 0.4s;
+}
+
+.button1 .span1 span:nth-child(4) {
+  transition: 0.5s;
+}
+
+.button1 .span1 span:nth-child(5) {
+  transition: 0.6s;
+}
+
+.button1 .span1 span:nth-child(6) {
+  transition: 0.7s;
+}
+
+.button1 .span2 {
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+}
+
+.button1 .span2 span {
+  transform: translateY(-1.2em);
+}
+
+.button1:hover .span2 span {
+  transform: translateY(0);
+}
+
+.button1 .span2 span {
+  transition: 0.2s;
+}
+
+.button1 .span2 span:nth-child(2) {
+  transition: 0.3s;
+}
+
+.button1 .span2 span:nth-child(3) {
+  transition: 0.4s;
+}
+
+.button1 .span2 span:nth-child(4) {
+  transition: 0.5s;
+}
+
+.button1 .span2 span:nth-child(5) {
+  transition: 0.6s;
+}
+
+.button1 .span2 span:nth-child(6) {
+  transition: 0.7s;
+}
+
+.div1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.container {
+  display: flex;
+  align-items: center
+}
+
+.div2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}

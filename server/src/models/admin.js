@@ -13,6 +13,10 @@ const Admin = (sequelize) => {
             allowNull: false,
             unique: true
         },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -32,7 +36,7 @@ const Admin = (sequelize) => {
         mercadoPagoClientSecret: {
             type: DataTypes.STRING,
             allowNull: true // Puedes ajustar esta restricción según tus necesidades
-        }
+        },
     }, { timestamps: false });
 };
 
