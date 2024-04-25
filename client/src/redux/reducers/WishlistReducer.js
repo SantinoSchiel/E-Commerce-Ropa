@@ -1,5 +1,5 @@
 // WishlistReducer.js
-import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../actions/types';
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from '../action-types';
 
 const initialState = {
   wishlist: JSON.parse(localStorage.getItem('wishlist')) || [],

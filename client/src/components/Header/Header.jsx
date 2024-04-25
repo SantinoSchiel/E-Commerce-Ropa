@@ -26,51 +26,86 @@ function Header() {
       <div className={styles.nav}>
         <div className={styles.div1}>
           {location.pathname !== '/' && (
-            <li><Link to="/" className={styles.navLink}>
-              <button className={styles.button1}>
-                <span className={styles.span1}>
-                  <span>I</span>
-                  <span>n</span>
-                  <span>i</span>
-                  <span>c</span>
-                  <span>i</span>
-                  <span>o</span>
-                </span>
-                <span className={styles.span2}>
-                  <span>I</span>
-                  <span>n</span>
-                  <span>i</span>
-                  <span>c</span>
-                  <span>i</span>
-                  <span>o</span>
-                </span>
-              </button>
-            </Link></li>
+            <li>
+              <Link to="/" className={styles.navLink}>
+                <button className={styles.button1}>
+                  <span className={styles.span1}>
+                    <span>I</span>
+                    <span>n</span>
+                    <span>i</span>
+                    <span>c</span>
+                    <span>i</span>
+                    <span>o</span>
+                  </span>
+                  <span className={styles.span2}>
+                    <span>I</span>
+                    <span>n</span>
+                    <span>i</span>
+                    <span>c</span>
+                    <span>i</span>
+                    <span>o</span>
+                  </span>
+                </button>
+              </Link>
+            </li>
           )}
 
           {location.pathname !== '/cart' && (
-            <li><Link to="/cart" className={styles.navLink}>
-              <button className={styles.button1}>
-                <span className={styles.span1}>
-                  <span>C</span>
-                  <span>a</span>
-                  <span>r</span>
-                  <span>r</span>
-                  <span>i</span>
-                  <span>t</span>
-                  <span>o</span>
-                </span>
-                <span className={styles.span2}>
-                  <span>C</span>
-                  <span>a</span>
-                  <span>r</span>
-                  <span>r</span>
-                  <span>i</span>
-                  <span>t</span>
-                  <span>o</span>
-                </span>
-              </button>
-            </Link></li>
+            <li>
+              <Link to="/cart" className={styles.navLink}>
+                <button className={styles.button1}>
+                  <span className={styles.span1}>
+                    <span>C</span>
+                    <span>a</span>
+                    <span>r</span>
+                    <span>r</span>
+                    <span>i</span>
+                    <span>t</span>
+                    <span>o</span>
+                  </span>
+                  <span className={styles.span2}>
+                    <span>C</span>
+                    <span>a</span>
+                    <span>r</span>
+                    <span>r</span>
+                    <span>i</span>
+                    <span>t</span>
+                    <span>o</span>
+                  </span>
+                </button>
+              </Link>
+            </li>
+          )}
+
+          {location.pathname !== '/favorites' && (
+            <li>
+              <Link to="/favorites" className={styles.navLink}>
+                <button className={styles.button1}>
+                  <span className={styles.span1}>
+                    <span>F</span>
+                    <span>a</span>
+                    <span>v</span>
+                    <span>o</span>
+                    <span>r</span>
+                    <span>i</span>
+                    <span>t</span>
+                    <span>o</span>
+                    <span>s</span>
+                  </span>
+                  <span className={styles.span2}>
+                    <span>F</span>
+                    <span>a</span>
+                    <span>v</span>
+                    <span>o</span>
+                    <span>r</span>
+                    <span>i</span>
+                    <span>t</span>
+                    <span>o</span>
+                    <span>s</span>
+                  </span>
+                </button>
+              </Link>
+            </li>
           )}
         </div>
 

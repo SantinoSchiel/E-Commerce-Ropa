@@ -13,6 +13,7 @@ import CartPage from './components/CartPage/CartPage';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Favorites from './components/Favorites/Favorites'
 import { loadCartFromLocalStorage } from './redux/actions';
 import { useDispatch } from 'react-redux';
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
