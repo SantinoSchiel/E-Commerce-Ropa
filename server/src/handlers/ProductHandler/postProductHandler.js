@@ -5,6 +5,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 const postProductsHandler = async (req, res) => {
   try {
+    console.log(req.body , 'req.body');
     // Verificar si se han enviado archivos
     if (!req.files || req.files.length === 0) {
       throw new Error("No se han enviado archivos");
@@ -21,8 +22,11 @@ const postProductsHandler = async (req, res) => {
     const size = Array.isArray(req.body.size) ? req.body.size : [req.body.size];
     console.log(size, 'size');
 
+    const color = Array.isArray(req.body.color) ? req.body.color : [req.body.color];
+    console.log(color, 'color');
+
     // Combinar las URLs de las imágenes con los datos del producto
-    const data = { ...req.body, images, size };
+    const data = { ...req.body, images, size, color };
 
     // Llamar a la función postProducts con los datos del producto
     const newProduct = await postProducts(data);

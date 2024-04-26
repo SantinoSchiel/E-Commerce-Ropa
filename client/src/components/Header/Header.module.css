@@ -116,6 +116,7 @@
 
 .button1 .span1 {
   display: flex;
+  position: absolute;
   overflow: hidden;
 }
 

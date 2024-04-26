@@ -107,6 +107,35 @@ function Header() {
               </Link>
             </li>
           )}
+
+          {location.pathname !== '/form' && (
+            <li>
+              <Link to="/form" className={styles.navLink}>
+                <button className={styles.button1}>
+                  <span className={styles.span1}>
+                    <span>P</span>
+                    <span>u</span>
+                    <span>b</span>
+                    <span>l</span>
+                    <span>i</span>
+                    <span>c</span>
+                    <span>a</span>
+                    <span>r</span>
+                  </span>
+                  <span className={styles.span2}>
+                    <span>P</span>
+                    <span>u</span>
+                    <span>b</span>
+                    <span>l</span>
+                    <span>i</span>
+                    <span>c</span>
+                    <span>a</span>
+                    <span>r</span>
+                  </span>
+                </button>
+              </Link>
+            </li>
+          )}
         </div>
 
         <div className={styles.div2}>
