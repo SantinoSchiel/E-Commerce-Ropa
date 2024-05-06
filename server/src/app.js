@@ -16,6 +16,14 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use(cors());
+// server.use((req, res, next) => {
+//   console.log('Solicitud recibida:');
+//   console.log('Método:', req.method);
+//   console.log('URL:', req.originalUrl);
+//   console.log('Cuerpo:', req.body);
+//   console.log('Archivos:', req.files);
+//   next();
+// });
 
 server.use('/', routes);
 

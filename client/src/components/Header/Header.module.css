@@ -1,0 +1,102 @@
+.mainHeader {
+  height: 3.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+  background-color: #f2f2f2;
+  padding: 0.1rem;
+}
+
+.container {
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+  background-color: #f2f2f2;
+}
+
+.mainHeader li{
+  list-style-type: none;
+}
+  
+.navList {
+  list-style-type: none; /* Quita los estilos de lista predeterminados */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+  margin: 0; /* Elimina el margen predeterminado de la lista */
+  display: inline-block; /* Hace que los botones sean elementos en línea */
+  margin-right: 10px; /* Espaciado entre los botones */
+}
+  
+.navLink {
+  text-decoration: none;
+}
+
+.div1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.div1 li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.container {
+  display: flex;
+  align-items: center
+}
+
+.div2 {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem;
+}
+
+.div2 li {
+  list-style-type: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button1 {
+  background-color: #eee;
+  border: none;
+  padding: 0.4rem;
+  font-size: 1rem;
+  width: 6em;
+  border-radius: 1rem;
+  color: rgb(243, 146, 146);
+  box-shadow: 0.1rem 0.4rem #dfd9d9;
+  cursor: pointer;
+}
+
+.profileImage {
+  width: 2.6rem; /* Ajusta el ancho según tus preferencias */
+  height: 2.6rem; /* Ajusta la altura según tus preferencias */
+  border-radius: 50%; /* Para que la imagen tenga forma circular */
+  margin-right: 0.5rem; /* Espaciado entre la imagen y el botón de desloguearse */
+  cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
+}
+
+ 
+.button1:active {
+  color: white;
+  box-shadow: 0.1rem 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+}
+ 
+.button1:hover:not(:disabled) {
+  background: rgb(239, 157, 157);
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+}
+ 
+.button1:disabled {
+  cursor: auto;
+  color: grey;
+}

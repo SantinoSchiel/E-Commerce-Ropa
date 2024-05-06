@@ -1,0 +1,133 @@
+/* ProductDetail.module.css */
+
+.productDetail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem; /* 20px a rem */
+}
+  
+.imageGallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem; /* 10px a rem */
+}
+  
+.thumbnail {
+  width: 3.8rem; /* No hay una conversión directa, lo dejamos como está */
+  height: 4rem; /* No hay una conversión directa, lo dejamos como está */
+  cursor: pointer;
+  border: 0.0625rem solid #000000; /* 1px a rem */
+  border-radius: 0.3125rem; /* 5px a rem */
+  margin-top: 1rem; /* 16px a rem */
+  margin-left: 1rem; /* 16px a rem */
+  margin-right: 1rem; /* 16px a rem */
+}
+  
+.productImages img {
+  max-width: 17rem; /* 272px a rem */
+  max-height: 28rem; /* 448px a rem */
+  border-radius: 1rem; /* 16px a rem */
+  margin-top: 1rem; /* 16px a rem */
+  object-fit: cover;
+}
+  
+.productDetail .productDetails {
+  flex: 2;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+  background-color: #f2f2f2;
+  padding: 1.2rem; /* 20px a rem */
+  margin-top: 1.1rem; /* 16px a rem */
+  max-width: 30rem; /* 480px a rem */
+  margin-left: 5rem; /* 80px a rem */
+}
+  
+.productDetail h2 {
+  font-size: 1.5rem; /* 24px a rem */
+  color: #333;
+  margin-bottom: 0.625rem; /* 10px a rem */
+  margin-top: 0;
+}
+  
+.productDetail p {
+  margin-bottom: 0.625rem; /* 10px a rem */
+  color: #333;
+}
+  
+.productDetail label {
+  display: block;
+  margin-bottom: 0.3125rem; /* 5px a rem */
+  color: #333;
+}
+  
+.productDetail select {
+  width: 8rem;
+  padding: 0.5rem; /* 8px a rem */
+}
+  
+.productDetail button {
+  padding: 0.5rem;
+  background-color: lightcoral;
+  color: #fff;
+  border: none;
+  border-radius: 0.3125rem; /* 5px a rem */
+  cursor: pointer;
+  margin-right: 1rem;
+  box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
+}
+  
+.productDetail button:hover {
+  background-color: rgba(240, 128, 128, 0.651);
+}
+  
+.selected {
+  border-color: #333;
+}
+
+.inCartButton {
+  background-color: rgb(244, 98, 98) !important;
+  width: 10.1rem !important;
+}
+
+.inCartButton:hover {
+  background-color: lightcoral !important;
+}
+
+.removeFav {
+  background-color: rgb(244, 98, 98) !important;
+  width: 10.1rem !important;
+}
+
+.removeFav:hover {
+  background-color: lightcoral !important;
+}
+
+.buttonTalles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 1rem;
+}
+
+.buttonColors {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinea verticalmente los elementos */
+}
+
+.buttonTalles button,
+.buttonColors button {
+  width: 10rem; /* Ancho fijo para los botones */
+}
+
+.buttonBuy{
+  padding: 0.5rem;
+  width: 6rem;
+}
+
+.divBuy {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
+}

@@ -1,0 +1,15 @@
+.container {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: black;
+}

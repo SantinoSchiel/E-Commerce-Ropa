@@ -1,0 +1,130 @@
+.cartContainer {
+    display: flex;
+    justify-content: space-around;
+}
+  
+.productCard {
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+    background-color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 1rem; /* 16px a rem */ 
+    width: 30rem; /* 480px a rem */
+    margin-top: 2rem; /* 32px a rem */
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.quantityButton {
+    width: 2rem; /* 32px a rem */
+    height: 2rem; /* 32px a rem */
+}
+  
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productDetails h3 {
+    margin: 0;
+    font-size: 1.2rem; /* 20px a rem */
+}
+  
+.actions {
+    display: flex;
+    margin-top: 1.25rem; /* 20px a rem */
+}
+  
+.removeButton,
+.buyNowButton {
+    padding: 0.5rem;
+    background-color: lightcoral;
+    color: #fff;
+    border: none;
+    border-radius: 0.3125rem; /* 5px a rem */
+    cursor: pointer;
+    margin-right: 1rem;
+    box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
+}
+  
+.removeButton:hover,
+.buyNowButton:hover {
+    background-color: rgb(240, 147, 147);
+}
+  
+.quantityControl {
+    display: flex;
+    align-items: center;
+}
+  
+.quantityButton {
+    background-color: lightcoral;
+    color: #fff;
+    border: none;
+    border-radius: 0.1875rem; /* 3px a rem */
+    padding: 0.3125rem; /* 5px a rem */
+    cursor: pointer;
+}
+  
+.quantity {
+    margin: 0 0.625rem; /* 10px a rem */
+    font-size: 1rem; /* 16px a rem */
+}
+  
+.productPrice {
+    margin: 0;
+    padding: 0.625rem; /* 10px a rem */
+    font-size: 1.2rem; /* 20px a rem */
+    font-weight: bold;
+    width: 20%; /* 20% */
+}
+  
+.summaryColumn {
+    width: 18.75rem; /* 300px a rem */
+}
+  
+.summaryCard {
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+    background-color: #f2f2f2;
+    padding: 1rem; /* 12px a rem */
+    border: 0.0625rem solid #ccc; /* 1px a rem */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 2rem; /* 32px a rem */
+}
+
+.summaryCard h2 {
+    margin-top: 0;
+}
+  
+.checkoutButton {
+    padding: 0.5rem;
+    background-color: lightcoral;
+    color: #fff;
+    border: none;
+    border-radius: 0.3125rem; /* 5px a rem */
+    cursor: pointer;
+    margin-right: 1rem;
+    box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
+}
+  
+.checkoutButton:hover {
+    background-color: rgb(240, 147, 147);
+}
+
+.productImage {
+    width: 6rem; /* 96px a rem */
+    height: 6rem; /* 96px a rem */
+    object-fit: cover;
+    border-radius: 1rem; /* 16px a rem */
+}
