@@ -5,7 +5,7 @@ const postAdminHandler = async (req, res) => {
     
     const { username, password, mercadoPagoClientId, email, mercadoPagoClientSecret, image } = req.body; 
   
-    if (!username) return res.status(400).json({ error: "Falta username" });
+    if (!email) return res.status(400).json({ error: "Falta email" });
     const AdminData = { username, password, mercadoPagoClientId, email, mercadoPagoClientSecret, image }
 
     const newAdmin = await postAdmin(AdminData);

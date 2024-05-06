@@ -1,26 +1,30 @@
-// redux/reducers/authReducer.js
+import {
+    LOGIN_USER,
+    LOGOUT_USER
+} from '../../redux/action-types';
+
 const initialState = {
-    isAuthenticated: false,
-    // Otros estados relacionados con la autenticación que puedas necesitar
-  };
-  
-  const authReducer = (state = initialState, action) => {
+    isLoggedIn: false,
+    userData: null,
+};
+
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'LOGIN':
-        return {
-          ...state,
-          isAuthenticated: true,
-        };
-      case 'LOGOUT':
-        return {
-          ...state,
-          isAuthenticated: false,
-        };
-      // Otros casos para manejar acciones relacionadas con la autenticación
-      default:
-        return state;
+        case LOGIN_USER:
+            return {
+                ...state,
+                isLoggedIn: true,
+                userData: action.payload,
+            };
+        case LOGOUT_USER:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userData: null,
+            };
+        default:
+            return state;
     }
-  };
-  
-  export default authReducer;
-  
+};
+
+export default authReducer;

@@ -32,6 +32,7 @@ function uploadMultipleImages(req, res, next) {
 const postCustomerHandler = require('../handlers/customerHandler/postCustomerhandler');
 const getCustomerHandler = require('../handlers/customerHandler/getCustomerHandler');
 const putCustomerHandler = require('../handlers/customerHandler/putCustomerHandler');
+const putCustomerCartHandler = require('../handlers/customerHandler/putCustomerCartHandler');
 
 const postProductHandler = require('../handlers/ProductHandler/postProductHandler');
 const getProductHandler = require('../handlers/ProductHandler/getProductHandler');
@@ -53,6 +54,9 @@ const postOrderDetailHandler = require('../handlers/orderDetailHandler/postOrder
 const getAdminHandler = require('../handlers/adminHandler/getAdminHandler');
 const putAdminHandler = require('../handlers/adminHandler/putAdminHandler');
 const postAdminHandler = require('../handlers/adminHandler/postAdminHandler');
+const deleteCartCustomerHandler = require('../handlers/customerHandler/deleteCartCustomerHandler');
+const putCustomerFavoritesHandler = require('../handlers/customerHandler/putCustomerFavoritesHandler');
+const deleteFavoritesCustomerHandler = require('../handlers/customerHandler/deleteFavoritesCustomerHandler');
 
 const router = Router();
 
@@ -61,6 +65,12 @@ const router = Router();
 router.post('/customer', postCustomerHandler);
 router.get('/customer', getCustomerHandler);
 router.put('/customer/:id', putCustomerHandler);
+
+router.put('/customer/cart/:id', putCustomerCartHandler);
+router.delete('/customer/cart/:customerId/:productId', deleteCartCustomerHandler);
+
+router.put('/customer/favorites/:id', putCustomerFavoritesHandler);
+router.delete('/customer/favorites/:customerId/:productId', deleteFavoritesCustomerHandler);
 
 router.post('/product', uploadMultipleImages, postProductHandler);
 router.get('/product', getProductHandler);

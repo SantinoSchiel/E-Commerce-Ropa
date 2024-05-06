@@ -37,6 +37,11 @@ const product = (sequelize) => {
       adminId: {
         type: DataTypes.UUID,
         allowNull: false
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
       }
     },
     { timestamps: false }

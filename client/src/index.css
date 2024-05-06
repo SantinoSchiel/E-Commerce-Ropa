@@ -3,8 +3,8 @@
   --line-height: 1.5;
   --font-weight: 400;
 
-  --text-color: rgba(255, 255, 255, 0.87);
-  --background-color: #242424;
+  --text-color: rgba(0, 0, 0, 0.87); /* Color de texto en modo claro */
+  --background-color: #ffffff; /* Color de fondo en modo claro */
 }
 
 body {
@@ -18,10 +18,4 @@ body {
 /* Media Queries para Responsive Design */
 @media screen and (max-width: 768px) {
   /* Estilos para dispositivos móviles */
-}
-
-/* Dark Mode */
-body.dark-mode {
-  --text-color: #333; /* Cambia el color del texto en modo oscuro */
-  --background-color: #f0f0f0; /* Cambia el color de fondo en modo oscuro */
 }

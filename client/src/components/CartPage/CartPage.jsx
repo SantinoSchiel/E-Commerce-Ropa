@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, fetchProducts, removeFromCart, moveFromCart } from '../../redux/actions';
+import { fetchProducts, getUsers } from '../../redux/actions';
 import styles from './CartPage.module.css';
+import axios from 'axios';
+const URL_API = import.meta.env.VITE_URL_API;
 
 function Cart() {
   const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.items);
+  const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+  const [cartItems, setCartItems] = useState([]);
   const products = useSelector(state => state.products.products);
   const productsLoading = useSelector(state => state.products.loading);
 
@@ -18,16 +21,52 @@ function Cart() {
   }, [dispatch, products, productsLoading]);
 
   useEffect(() => {
-    const initialQuantities = {};
-    Object.keys(cartItems).forEach(productId => {
-      initialQuantities[productId] = cartItems[productId];
-    });
-    setQuantities(initialQuantities);
-  }, [cartItems]);
+    const fetchData = async () => {
+      try {
+        const users = await dispatch(getUsers());
+        console.log(users, 'users');
+        const user = users.find(user => user.id === userFromLocalStorage.id);
+        console.log(user, 'user');
+        const userCart = user.cart;
+        setCartItems(userCart); // Actualizar el estado del carrito
+        const initialQuantities = {};
+        Object.keys(userCart).forEach(productId => {
+          initialQuantities[productId] = userCart[productId];
+        });
+        setQuantities(initialQuantities);
+      } catch (error) {
+        console.error('Error al obtener el carrito del usuario:', error);
+      }
+    };
+    fetchData();
+  }, [dispatch, userFromLocalStorage.id]);
 
-  const handleRemoveFromCart = productId => {
-    console.log('Removing product:', productId);
-    dispatch(removeFromCart(productId));
+  const handleRemoveFromCart = async productId => {
+    try {
+      const product = products.find(product => product.id === productId);
+      const action = 'reducir'; // o 'eliminar'
+      const { data } = await axios.delete(`${URL_API}/customer/cart/${userFromLocalStorage.id}/${product.id}?action=${action}`);
+      console.log(data, 'dataFromHandleRemoveFromCart');
+
+      // Actualizar el estado de cartItems y quantities después de eliminar el producto del carrito
+      const updatedCartItems = { ...cartItems };
+      const updatedQuantities = { ...quantities };
+
+      // Si la cantidad actual del producto es mayor que 1, simplemente reducimos la cantidad
+      if (updatedCartItems[productId] > 1) {
+        updatedCartItems[productId]--;
+        updatedQuantities[productId]--;
+      } else {
+        // Si la cantidad es 1, eliminamos completamente el producto
+        delete updatedCartItems[productId];
+        delete updatedQuantities[productId];
+      }
+
+      setCartItems(updatedCartItems);
+      setQuantities(updatedQuantities);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculateTotalPrice = () => {
@@ -45,13 +84,35 @@ function Cart() {
     return <p>Loading cart...</p>;
   }
 
-  const handleAddToCart = productId => {
+  const handleAddToCart = async productId => {
     const product = products.find(product => product.id === productId);
-    dispatch(addToCart(product));
+    const { data } = await axios.put(`${URL_API}/customer/cart/${userFromLocalStorage.id}`, product.id);
+    console.log(data.cart, 'dataFromHandleAddToCart');
+
+    const updatedCartItems = { ...cartItems, [productId]: (cartItems[productId] || 0) + 1 };
+    setCartItems(updatedCartItems);
+    const updatedQuantities = { ...quantities, [productId]: (quantities[productId] || 0) + 1 };
+    setQuantities(updatedQuantities);
   };
 
-  const handleMoveFromCart = productId => {
-    dispatch(moveFromCart(productId));
+  const handleMoveFromCart = async productId => {
+    try {
+      const product = products.find(product => product.id === productId);
+      const action = 'eliminar';
+      const { data } = await axios.delete(`${URL_API}/customer/cart/${userFromLocalStorage.id}/${product.id}?action=${action}`);
+      console.log(data, 'dataFromHandleMoveFromCart');
+
+      // Actualizar el estado de cartItems y quantities después de eliminar el producto del carrito
+      const updatedCartItems = { ...cartItems };
+      delete updatedCartItems[productId];
+      setCartItems(updatedCartItems);
+
+      const updatedQuantities = { ...quantities };
+      delete updatedQuantities[productId];
+      setQuantities(updatedQuantities);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -99,11 +160,15 @@ function Cart() {
         </div>
       </div>
       <div className={styles.summaryColumn}>
-        <div className={styles.summaryCard}>
-          <h2>Orden de compra</h2>
-          <p>Total ${calculateTotalPrice()}</p>
-          <button className={styles.checkoutButton}>Continuar compra</button>
-        </div>
+        {Object.entries(cartItems).length === 0 ? (
+          <></>
+        ) : (
+          <div className={styles.summaryCard}>
+            <h2>Orden de compra</h2>
+            <p>Total ${calculateTotalPrice()}</p>
+            <button className={styles.checkoutButton}>Continuar compra</button>
+          </div>
+        )}
       </div>
     </div>
   );

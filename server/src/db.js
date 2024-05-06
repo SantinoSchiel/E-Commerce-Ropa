@@ -7,11 +7,9 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 //!Crear modelos
 const CustomerModel = require("./models/customer");
-const OrderModel = require("./models/order");
-const orderDetailModel = require("./models/orderDetail");
 const productModel = require("./models/Product");
-const mercadoPagoModel = require("./models/mercadoPago");
 const adminModel = require("./models/admin");
+const PurchaseModel = require("./models/Purchase");
 
 const sequelize = new Sequelize(
   `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
@@ -44,32 +42,24 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 //!Pasar modelos por sequelize
 CustomerModel(sequelize);
-OrderModel(sequelize);
-orderDetailModel(sequelize);
 productModel(sequelize);
-mercadoPagoModel(sequelize);
 adminModel(sequelize);
+PurchaseModel(sequelize);
 
-const { Customer, Order, orderDetail, Product, MercadoPago, Admin } = sequelize.models;
+const { Customer, Product, Admin, Purchase } = sequelize.models;
 
 //!relaciones
-Customer.hasMany(Order, { foreignKey: "customerId" });
-Order.belongsTo(Customer, { foreignKey: "customerId" });
+Customer.hasMany(Purchase, { foreignKey: "customerId" });
+Purchase.belongsTo(Customer, { foreignKey: "customerId" });
 
-Order.hasMany(orderDetail);
-orderDetail.belongsTo(Order);
+Admin.hasMany(Purchase, { foreignKey: "adminId" });
+Purchase.belongsTo(Admin, { foreignKey: "adminId" });
 
-orderDetail.belongsToMany(Product, { through: 'OrderDetailProduct' });
-Product.belongsToMany(orderDetail, { through: 'OrderDetailProduct' });
-
-MercadoPago.belongsTo(Order);
-Order.hasOne(MercadoPago);
+Purchase.belongsToMany(Product, { through: 'OrderDetailProduct' });
+Product.belongsToMany(Purchase, { through: 'OrderDetailProduct' });
 
 Admin.hasMany(Product, { foreignKey: 'adminId' });
 Product.belongsTo(Admin, { foreignKey: 'adminId' });
-
-Admin.hasMany(Customer, { foreignKey: 'adminId' });
-Customer.belongsTo(Admin, { foreignKey: 'adminId' });
 
 module.exports = {
   ...sequelize.models,

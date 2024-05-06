@@ -10,7 +10,8 @@ const Customer = (sequelize) => {
     },
     fullname: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      unique: true
     },
     image: {
       type: DataTypes.STRING,
@@ -22,8 +23,7 @@ const Customer = (sequelize) => {
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -33,17 +33,23 @@ const Customer = (sequelize) => {
         isEmail: true
       }
     },
-    adress: {
+    address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
-    adminId: {
-      type: DataTypes.UUID,
-      allowNull: false
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: []
+    },
+    cart: {
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: {}
     }
   }, { timestamps: false });
 };

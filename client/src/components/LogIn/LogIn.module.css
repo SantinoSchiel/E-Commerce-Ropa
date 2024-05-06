@@ -1,0 +1,120 @@
+/* LogIn.module.css */
+
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+  
+.login-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+  
+.form-group label {
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.form-group input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    font-size: 1rem;
+}
+
+.form-group button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+  
+button[type="submit"] {
+    width: 7rem !important;
+    margin-top: 1rem !important;
+    padding: 0.5rem;
+    background-color: lightcoral;
+    color: #fff;
+    border: none;
+    border-radius: 0.3125rem; /* 5px a rem */
+    cursor: pointer;
+    box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
+}
+
+.register {
+    margin-top: 1rem;
+    width: 7rem;
+    padding: 0.5rem;
+    background-color: lightcoral;
+    color: #fff;
+    border: none;
+    border-radius: 0.3125rem; /* 5px a rem */
+    cursor: pointer;
+    box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
+}
+
+.register:hover {
+    background-color: rgba(240, 128, 128, 0.651);
+}
+  
+button[type="submit"]:hover {
+    background-color: rgba(240, 128, 128, 0.651);
+}
+  
+.google-login-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+  
+.google-login-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+  
+.google-login-button:hover {
+    background-color: #f1f1f1;
+}
+
+.form-button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center
+}

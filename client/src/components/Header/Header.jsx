@@ -1,151 +1,76 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css'; // Importa el archivo de estilos CSS para el encabezado
+import { useSelector } from 'react-redux';
 
 function Header() {
-  const location = useLocation();
-
-  // Agrega el event listener cuando el componente se monta
-  useEffect(() => {
-    const toggleDarkMode = () => {
-      const body = document.body;
-      body.classList.toggle('dark-mode');
-    };
-
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    darkModeToggle.addEventListener('click', toggleDarkMode);
-
-    // Elimina el event listener cuando el componente se desmonta
-    return () => {
-      darkModeToggle.removeEventListener('click', toggleDarkMode);
-    };
-  }, []); // El arreglo vacío [] asegura que este efecto se ejecute solo una vez, cuando el componente se monta
+  const userRedux = useSelector(state => state.user.user);
+  const isLoggedInLocalStorage = JSON.parse(localStorage.getItem('isLoggedIn'));
+  const isLoggedInRedux = useSelector(state => state.isLoggedIn.isLoggedIn);
+  const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
+  // console.log(userFromLocalStorage.image, 'userFromLocalStorage');
+  const admin = JSON.parse(localStorage.getItem('admin'));
+  // console.log(admin, 'admin');
 
   return (
-    <div className={styles.mainHeader}>
-      <div className={styles.nav}>
-        <div className={styles.div1}>
-          {location.pathname !== '/' && (
-            <li>
-              <Link to="/" className={styles.navLink}>
-                <button className={styles.button1}>
-                  <span className={styles.span1}>
-                    <span>I</span>
-                    <span>n</span>
-                    <span>i</span>
-                    <span>c</span>
-                    <span>i</span>
-                    <span>o</span>
-                  </span>
-                  <span className={styles.span2}>
-                    <span>I</span>
-                    <span>n</span>
-                    <span>i</span>
-                    <span>c</span>
-                    <span>i</span>
-                    <span>o</span>
-                  </span>
-                </button>
-              </Link>
-            </li>
-          )}
+    <div className={styles.container}>
+      <div className={styles.div1}>
+        <li>
+          <Link to="/" className={styles.navLink}>
+            <button className={styles.button1}>
+              Inicio
+            </button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/cart" className={styles.navLink}>
+            <button className={styles.button1}>
+              Carrito
+            </button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/favorites" className={styles.navLink}>
+            <button className={styles.button1}>
+              Favoritos
+            </button>
+          </Link>
+        </li>
+        {admin && admin.id && (
+          <li>
+            <Link to="/form" className={styles.navLink}>
+              <button className={styles.button1}>
+                Publicar
+              </button>
+            </Link>
+          </li>
+        )}
+      </div>
 
-          {location.pathname !== '/cart' && (
-            <li>
-              <Link to="/cart" className={styles.navLink}>
-                <button className={styles.button1}>
-                  <span className={styles.span1}>
-                    <span>C</span>
-                    <span>a</span>
-                    <span>r</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>t</span>
-                    <span>o</span>
-                  </span>
-                  <span className={styles.span2}>
-                    <span>C</span>
-                    <span>a</span>
-                    <span>r</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>t</span>
-                    <span>o</span>
-                  </span>
-                </button>
-              </Link>
-            </li>
-          )}
-
-          {location.pathname !== '/favorites' && (
-            <li>
-              <Link to="/favorites" className={styles.navLink}>
-                <button className={styles.button1}>
-                  <span className={styles.span1}>
-                    <span>F</span>
-                    <span>a</span>
-                    <span>v</span>
-                    <span>o</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>t</span>
-                    <span>o</span>
-                    <span>s</span>
-                  </span>
-                  <span className={styles.span2}>
-                    <span>F</span>
-                    <span>a</span>
-                    <span>v</span>
-                    <span>o</span>
-                    <span>r</span>
-                    <span>i</span>
-                    <span>t</span>
-                    <span>o</span>
-                    <span>s</span>
-                  </span>
-                </button>
-              </Link>
-            </li>
-          )}
-
-          {location.pathname !== '/form' && (
-            <li>
-              <Link to="/form" className={styles.navLink}>
-                <button className={styles.button1}>
-                  <span className={styles.span1}>
-                    <span>P</span>
-                    <span>u</span>
-                    <span>b</span>
-                    <span>l</span>
-                    <span>i</span>
-                    <span>c</span>
-                    <span>a</span>
-                    <span>r</span>
-                  </span>
-                  <span className={styles.span2}>
-                    <span>P</span>
-                    <span>u</span>
-                    <span>b</span>
-                    <span>l</span>
-                    <span>i</span>
-                    <span>c</span>
-                    <span>a</span>
-                    <span>r</span>
-                  </span>
-                </button>
-              </Link>
-            </li>
-          )}
-        </div>
-
-        <div className={styles.div2}>
-          <div className={styles.darkModeToggle}>
-            <label className={styles.switch} htmlFor="dark-mode-toggle">
-              <input type="checkbox" id="dark-mode-toggle" className={styles.input__check} />
-              <span className={styles.slider}></span>
-            </label>
+      <div className={styles.div2}>
+        {(admin && admin.image) ? (
+          <div className={styles.img}>
+            <Link to='/dashboard'>
+              <img src={admin.image} alt="adminImage" className={styles.profileImage} />
+            </Link>
           </div>
-        </div>
+        ) : (
+          (userFromLocalStorage && userFromLocalStorage.image) ? (
+            <div className={styles.img}>
+              <Link to='/dashboard'>
+                <img src={userFromLocalStorage.image} alt="userImage" className={styles.profileImage} />
+              </Link>
+            </div>
+          ) : (
+            <li>
+              <Link to="/login" className={styles.navLink}>
+                <button className={styles.button1}>
+                  Loguearse
+                </button>
+              </Link>
+            </li>
+          )
+        )}
       </div>
     </div>
   );

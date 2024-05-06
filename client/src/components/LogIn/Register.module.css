@@ -1,0 +1,70 @@
+/* Register.module.css */
+
+.register-container {
+    max-width: 25rem;
+    margin-top: 1rem;
+    margin-top: 1rem !important;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+.register-container h2 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.register-container input {
+    max-width: 22rem;
+}
+  
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.form-group {
+    margin-bottom: 20px;
+}
+  
+.label {
+    font-weight: bold;
+}
+  
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.submit-button:hover {
+    background-color: #0056b3;
+}
+  
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+  
+.login-link:hover {
+    text-decoration: underline;
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+}

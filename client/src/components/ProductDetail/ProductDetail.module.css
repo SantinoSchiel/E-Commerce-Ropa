@@ -33,9 +33,10 @@
   
 .productDetail .productDetails {
   flex: 2;
-  background-color: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.482);
+  background-color: #f2f2f2;
   padding: 1.2rem; /* 20px a rem */
-  border-radius: 0.5rem; /* 8px a rem */
   margin-top: 1.1rem; /* 16px a rem */
   max-width: 30rem; /* 480px a rem */
   margin-left: 5rem; /* 80px a rem */
@@ -62,21 +63,21 @@
 .productDetail select {
   width: 8rem;
   padding: 0.5rem; /* 8px a rem */
-  margin-bottom: 0.625rem; /* 10px a rem */
 }
   
 .productDetail button {
-  padding: 0.625rem 1.25rem; /* 10px 20px a rem */
-  background-color: #007bff;
+  padding: 0.5rem;
+  background-color: lightcoral;
   color: #fff;
   border: none;
   border-radius: 0.3125rem; /* 5px a rem */
   cursor: pointer;
   margin-right: 1rem;
+  box-shadow: rgb(243, 191, 191) 0.2rem 0.2rem;
 }
   
 .productDetail button:hover {
-  background-color: #0056b3;
+  background-color: rgba(240, 128, 128, 0.651);
 }
   
 .selected {
@@ -84,5 +85,49 @@
 }
 
 .inCartButton {
-  background-color: green !important;
+  background-color: rgb(244, 98, 98) !important;
+  width: 10.1rem !important;
+}
+
+.inCartButton:hover {
+  background-color: lightcoral !important;
+}
+
+.removeFav {
+  background-color: rgb(244, 98, 98) !important;
+  width: 10.1rem !important;
+}
+
+.removeFav:hover {
+  background-color: lightcoral !important;
+}
+
+.buttonTalles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 1rem;
+}
+
+.buttonColors {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinea verticalmente los elementos */
+}
+
+.buttonTalles button,
+.buttonColors button {
+  width: 10rem; /* Ancho fijo para los botones */
+}
+
+.buttonBuy{
+  padding: 0.5rem;
+  width: 6rem;
+}
+
+.divBuy {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
 }

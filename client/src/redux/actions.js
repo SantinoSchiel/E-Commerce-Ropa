@@ -10,6 +10,11 @@ import {
     ADD_TO_WISHLIST,
     REMOVE_FROM_WISHLIST,
     MOVE_FROM_CART,
+    CREATE_USER_SUCCESS,
+    CREATE_USER_ERROR,
+    LOGOUT_USER,
+    LOGIN_USER,
+    GET_ADMIN
 } from "./action-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -76,4 +81,75 @@ export const removeFromWishlist = (productId) => {
 const getWishlist = () => {
     const wishlist = localStorage.getItem('wishlist');
     return wishlist ? JSON.parse(wishlist) : [];
+};
+
+// export const createAdmin = (adminData) => {
+//     return async (dispatch) => {
+//         try {
+//             const response = await axios.post(`${URL_API}/admin`, adminData); // La ruta '/api/admin' debe ser sustituida por la ruta correcta de tu backend
+//             dispatch({ type: CREATE_ADMIN_SUCCESS, payload: response.data });
+//         } catch (error) {
+//             dispatch({ type: CREATE_ADMIN_ERROR, payload: error.message });
+//         }
+//     };
+// };
+
+export const createUser = (userData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(`${URL_API}/customer`, userData);
+            // console.log(response.data, 'response.data');
+            dispatch({ type: CREATE_USER_SUCCESS, payload: response.data });
+            return response.data;
+        } catch (error) {
+            console.log(error, 'error');
+            console.log(error.message, 'error.message');
+
+            dispatch({ type: CREATE_USER_ERROR, payload: error.message });
+            return error;
+        }
+    };
+};
+
+export const getUsers = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(`${URL_API}/customer`);
+            // console.log(response.data, 'response.data');
+            dispatch({ type: CREATE_USER_SUCCESS, payload: response.data });
+            return response.data;
+        } catch (error) {
+            // console.log(error, 'error');
+            // console.log(error.message, 'error.message');
+
+            dispatch({ type: CREATE_USER_ERROR, payload: error.message });
+            return error;
+        }
+    };
+}
+
+export const getAdmins = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(`${URL_API}/admin`);
+            console.log(response.data, 'data GET ADMIN');
+            dispatch({ type: GET_ADMIN, payload: response.data });
+            return response.data;
+        } catch (error) {
+            console.log(error, 'error EN GET ADMIN');
+        }
+    };
+}
+
+export const loginUser = (userData) => {
+    return {
+        type: LOGIN_USER,
+        payload: userData,
+    };
+};
+
+export const logoutUser = () => {
+    return {
+        type: LOGOUT_USER,
+    };
 };
