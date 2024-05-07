@@ -57,11 +57,12 @@ function Dashboard() {
     }, [userData]);
 
     const [editableUser, setEditableUser] = useState({
-        email: userData && userData.email,
-        fullname: userData && userData.fullname,
-        phone: userData && userData.phone,
-        address: userData && userData.address
+        email: userData ? userData.email : '',
+        fullname: userData ? userData.fullname : '',
+        phone: userData ? userData.phone : '',
+        address: userData ? userData.address : ''
     });
+
     // console.log(editableUser, 'editableUser');
 
     const handlePutCustomer = async () => {
