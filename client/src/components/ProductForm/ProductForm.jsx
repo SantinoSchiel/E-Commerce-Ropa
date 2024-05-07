@@ -16,6 +16,7 @@ const Form = () => {
   const [images, setImages] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const admin = JSON.parse(localStorage.getItem('admin'));
 
   // Opciones de categorías según el género seleccionado
   const categoryOptions = {
@@ -61,12 +62,15 @@ const Form = () => {
         formData.append('color', color);
       });
       formData.append('description', description);
-      formData.append('adminId', '37cec869-e2db-4e2e-85d6-76dcdd034b7b');
+      formData.append('adminId', admin.id);
 
       // Adjuntar imágenes al FormData
       images.forEach((image) => {
         formData.append('images', image);
       });
+
+      const formDataObject = Object.fromEntries(formData.entries());
+      console.log(formDataObject);
 
       const response = await axios.post(`${URL_API}/product`, formData);
       setIsSubmitted(true);

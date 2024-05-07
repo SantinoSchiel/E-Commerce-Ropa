@@ -5,6 +5,7 @@ import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductList.module.css';
 
 function ProductList({ products }) {
+  console.log(products, 'products');
   return (
     <div>
       <div className={styles.productList}>
