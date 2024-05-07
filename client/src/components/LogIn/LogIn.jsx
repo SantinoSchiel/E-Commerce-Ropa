@@ -19,30 +19,34 @@ const Login = () => {
 
     const admins = await dispatch(getAdmins());
     console.log(admins, 'admins');
-    admins.forEach(async (admin) => {
-      if (admin.email === email && admin.password === password) {
-        const action = await dispatch(loginUser({ email, password }));
+    if (admins) {
+      admins.forEach(async (admin) => {
+        if (admin.email === email && admin.password === password) {
+          const action = await dispatch(loginUser({ email, password }));
 
-        setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('admin', JSON.stringify(admin));
-      };
-    });
+          setIsLoggedIn(true);
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          localStorage.setItem('admin', JSON.stringify(admin));
+        };
+      });
+    }
 
     const action = await dispatch(getUsers());
-    action.forEach(async (element) => {
-      if (element.email === email && element.password === password) {
-        const action = await dispatch(loginUser({ email, password }));
-        // console.log(action, 'action');
+    if (action) {
+      action.forEach(async (element) => {
+        if (element.email === email && element.password === password) {
+          const action = await dispatch(loginUser({ email, password }));
+          // console.log(action, 'action');
 
-        setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          setIsLoggedIn(true);
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
 
-        localStorage.setItem('user', JSON.stringify(element));
-        const user = JSON.parse(localStorage.getItem('user'));
-        console.log(user, 'user');
-      };
-    });
+          localStorage.setItem('user', JSON.stringify(element));
+          const user = JSON.parse(localStorage.getItem('user'));
+          console.log(user, 'user');
+        };
+      });
+    }
   }
 
   // Maneja el éxito del inicio de sesión con Google
