@@ -1,50 +1,91 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styles from './Header.module.css'; // Importa el archivo de estilos CSS para el encabezado
-import { useSelector } from 'react-redux';
+import styles from './Header.module.css';
+import SearchBar from '../SearchBar/SearchBar';
+import { searchProducts, resetProducts } from '../../redux/actions';
 
 function Header() {
-  const userRedux = useSelector(state => state.user.user);
-  const isLoggedInLocalStorage = JSON.parse(localStorage.getItem('isLoggedIn'));
-  const isLoggedInRedux = useSelector(state => state.isLoggedIn.isLoggedIn);
   const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-  // console.log(userFromLocalStorage.image, 'userFromLocalStorage');
   const admin = JSON.parse(localStorage.getItem('admin'));
-  // console.log(admin, 'admin');
+  const dispatch = useDispatch();
+
+  const categoryOptions = {
+    hombre: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón', 'Short baño', 'Short deportivo', 'Chomba', 'Jean', 'Camisa', 'Sweater', 'Campera', 'Rompeviento', 'Zapato', 'Boxer', 'Cinto', 'Accesorio', 'Joguing', 'Joguer', 'Chaleco', 'Musculosa'],
+    mujer: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón', 'Falda', 'Vestido', 'Body', 'Top', 'Musculosa', 'Camisa', 'Blusa', 'Camisola', 'Jean', 'Palazo', 'Joguing', 'Short', 'Pollera', 'Solera', 'Blazer', 'Tapado', 'Campera', 'Camisaco', 'Chaleco', 'Accesorio', 'Bota', 'Sandalia', 'Borcego', 'Calza', 'Saco', 'Cárdigan'],
+  };
+
+  const handleCategoryClick = (category, gender) => {
+    dispatch(searchProducts('', category, gender));
+  };
+
+  const handleResetProducts = () => {
+    dispatch(resetProducts());
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.div1}>
         <li>
-          <Link to="/" className={styles.navLink}>
-            <button className={styles.button1}>
-              Inicio
-            </button>
+          <Link to="/" className={styles.navLink} onClick={handleResetProducts}>
+            <button className={styles.button1}>Inicio</button>
           </Link>
         </li>
         <li>
           <Link to="/cart" className={styles.navLink}>
-            <button className={styles.button1}>
-              Carrito
-            </button>
+            <button className={styles.button1}>Carrito</button>
           </Link>
         </li>
         <li>
           <Link to="/favorites" className={styles.navLink}>
-            <button className={styles.button1}>
-              Favoritos
-            </button>
+            <button className={styles.button1}>Favoritos</button>
           </Link>
         </li>
         {admin && admin.id && (
           <li>
             <Link to="/form" className={styles.navLink}>
-              <button className={styles.button1}>
-                Publicar
-              </button>
+              <button className={styles.button1}>Publicar</button>
             </Link>
           </li>
         )}
+
+        <li>
+          <SearchBar />
+        </li>
+
+        <li className={styles.dropdown}>
+          <div className={styles.dropdownToggle}>Categorías</div>
+          <div className={styles.dropdownMenu}>
+            <div className={styles.dropdownItem}>
+              Hombre
+              <div className={styles.subDropdownMenu}>
+                {categoryOptions.hombre.map((option) => (
+                  <div
+                    key={option}
+                    className={styles.subDropdownItem}
+                    onClick={() => handleCategoryClick(option, 'hombre')}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.dropdownItem}>
+              Mujer
+              <div className={styles.subDropdownMenu}>
+                {categoryOptions.mujer.map((option) => (
+                  <div
+                    key={option}
+                    className={styles.subDropdownItem}
+                    onClick={() => handleCategoryClick(option, 'mujer')}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </li>
       </div>
 
       <div className={styles.div2}>
@@ -64,9 +105,7 @@ function Header() {
           ) : (
             <li>
               <Link to="/login" className={styles.navLink}>
-                <button className={styles.button1}>
-                  Loguearse
-                </button>
+                <button className={styles.button1}>Loguearse</button>
               </Link>
             </li>
           )

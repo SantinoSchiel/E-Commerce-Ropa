@@ -5,7 +5,10 @@ import { fetchProducts } from '../../redux/actions';
 import styles from './ProductDetail.module.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+
 const URL_API = import.meta.env.VITE_URL_API;
+const PUBLIC_KEY = 'APP_USR-b9bf9934-2435-43d3-9130-8a4f5733b456';
 
 function ProductDetail({ productId }) {
   const dispatch = useDispatch();
@@ -13,11 +16,12 @@ function ProductDetail({ productId }) {
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedImage, setSelectedImage] = useState('');
   const { products, loading } = useSelector(state => state.products);
-  const { isLoggedIn } = useSelector(state => state.isLoggedIn);
   const [wishlist, setWishlist] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
-  console.log(userFromLocalStorage, 'userFromLocalStorage');
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+  const [preferenceId, setPreferenceId] = useState(null);
+  // console.log(userFromLocalStorage, 'userFromLocalStorage');
 
   const navigate = useNavigate();
 
@@ -49,14 +53,77 @@ function ProductDetail({ productId }) {
     fetchUserData();
   }, []);
 
-  const handleBuyNow = () => {
+  useEffect(() => {
+    initMercadoPago(PUBLIC_KEY, { locale: 'es-AR' });
+  }, []);
+
+  const createReferenceId = async () => {
+    try {
+      const product = products.find(product => product.id === productId);
+      console.log(product, 'product');
+      if (!product) return null;
+
+      const productData = {
+        id: product.id,
+        title: product.name,
+        unit_price: product.price,
+        quantity: 1,
+      };
+      console.log(productData, 'productData');
+
+      const response = await axios.post(`${URL_API}/create-order`, {
+        products: [productData]
+      });
+
+      // console.log("ACAAAAAAA")
+      console.log(response.data, 'Response data from create-order');
+      return response.data.id;
+    } catch (error) {
+      console.error('Error creating order:', error.response ? error.response.data : error.message);
+    }
+  };
+
+
+  const handleBuyNow = async () => {
     if (!isLoggedIn) {
       navigate(`/login?redirect=/product/${productId}`);
     } else {
-      //! TODO: Implementar la compra.
-      navigate(`/product/${productId}`);
+      const referenceId = await createReferenceId();
+
+      if (referenceId) {
+        setPreferenceId(referenceId);
+      }
     }
   };
+
+  const params = new URLSearchParams(window.location.search) || false;
+  const paymentId = params.get('payment_id') || false;
+  console.log(paymentId, 'paymentId');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (paymentId) {
+          const product = products.find(product => product.id === productId);
+          console.log(product, 'product');
+          if (!product) return null;
+
+          const { data } = await axios.post(`${URL_API}/purchase`, {
+            paymentId: paymentId,
+            amount: product.price,
+            customerId: userFromLocalStorage.id,
+            adminId: product.adminId,
+          });
+          console.log(data, 'dataFromhandleBuyNow');
+        }
+      } catch (error) {
+        console.error('Error handling purchase:', error);
+      }
+    };
+
+    fetchData();
+  }, [paymentId, products, productId, userFromLocalStorage.id]);
+
 
   const handleMoveFromCart = async () => {
     try {
@@ -160,7 +227,7 @@ function ProductDetail({ productId }) {
       // console.log(userFromLocalStorage[0].id, 'userFromLocalStorage');
       const idUser = userFromLocalStorage.id;
       const { data } = await axios.put(`${URL_API}/customer/favorites/${idUser}`, { productId });
-      console.log(data, 'dataFromhandleAddToWishlist');
+      // console.log(data, 'dataFromhandleAddToWishlist');
     } catch (error) {
       console.log(error)
     }
@@ -186,7 +253,7 @@ function ProductDetail({ productId }) {
 
       const idUser = userFromLocalStorage.id;
       const { data } = await axios.delete(`${URL_API}/customer/favorites/${idUser}/${productId}`);
-      console.log(data, 'dataFromhandleRemoveFromWishlist');
+      // console.log(data, 'dataFromhandleRemoveFromWishlist');
     } catch (error) {
       console.log(error);
     }
@@ -255,6 +322,14 @@ function ProductDetail({ productId }) {
         <div className={styles.divBuy}>
           <button className={styles.buttonBuy} onClick={handleBuyNow}>Comprar</button>
         </div>
+        {preferenceId && (
+          <div className={styles.walletContainer}>
+            <Wallet
+              initialization={{ preferenceId: preferenceId }}
+              customization={{ texts: { valueProp: 'smart_option' } }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

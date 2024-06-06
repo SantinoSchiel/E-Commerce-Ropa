@@ -3,7 +3,7 @@ const { Product } = require("../../db");
 const postProducts = async function (data) {
     console.log(data, 'data');
 
-    if (!data.name || !data.price || !data.size || !data.color || !data.description || !data.adminId || !data.images) {
+    if (!data.name || !data.price || !data.size || !data.color || !data.description || !data.adminId || !data.images || !data.category || !data.gender) {
         throw new Error('Faltan datos obligatorios para crear el producto');
     }
 
@@ -24,7 +24,9 @@ const postProducts = async function (data) {
             color: data.color,
             description: data.description,
             adminId: data.adminId,
-            images: data.images
+            images: data.images,
+            category: data.category,
+            gender: data.gender
         });
 
         console.log('DESPUES DE CREAR PRODUCTO', newProduct);

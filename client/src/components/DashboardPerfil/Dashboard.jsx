@@ -49,7 +49,7 @@ function Dashboard() {
         if (userData) {
             setEditableUser({
                 email: userData.email || '',
-                fullname: userData.fullname || '',
+                fullname: userData.username || userData.fullname || '',
                 phone: userData.phone || '',
                 address: userData.address || ''
             });
@@ -148,7 +148,7 @@ function Dashboard() {
                         <img src="/avatar-placeholder.png" alt="Avatar" />
                     </div>
                     <div className={styles.profileInfo}>
-                        <p>¡Bienvenido/a de nuevo, {user && user.fullname || admin && admin.fullname}!</p>
+                        <p>¡Bienvenido/a {user && user.fullname || admin && admin.username}!</p>
                     </div>
                 </div>
                 <nav>

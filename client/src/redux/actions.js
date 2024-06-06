@@ -14,7 +14,9 @@ import {
     CREATE_USER_ERROR,
     LOGOUT_USER,
     LOGIN_USER,
-    GET_ADMIN
+    GET_ADMIN,
+    SEARCH_PRODUCTS,
+    RESET_PRODUCTS,
 } from "./action-types";
 
 const URL_API = import.meta.env.VITE_URL_API;
@@ -151,5 +153,18 @@ export const loginUser = (userData) => {
 export const logoutUser = () => {
     return {
         type: LOGOUT_USER,
+    };
+};
+
+export const searchProducts = (searchTerm, category = null, gender = null) => {
+    return {
+        type: SEARCH_PRODUCTS,
+        payload: { searchTerm, category, gender },
+    };
+};
+
+export const resetProducts = () => {
+    return {
+        type: RESET_PRODUCTS,
     };
 };

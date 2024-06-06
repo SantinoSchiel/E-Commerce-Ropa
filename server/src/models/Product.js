@@ -42,6 +42,14 @@ const product = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true
+      },
+      gender: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     },
     { timestamps: false }

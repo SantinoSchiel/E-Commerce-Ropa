@@ -3,6 +3,7 @@ const postCustomer = require("../../controllers/customer/postCustomer");
 const postCustomerHandler = async (req, res) => {
   try {
     const { fullname, phone, email, address, image, password } = req.body;
+    console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
     // Verificar si el inicio de sesión se realiza con Google
     const isGoogleLogin = req.body.googleCredential !== undefined;

@@ -18,3 +18,7 @@ export const CREATE_USER_ERROR = 'CREATE_USER_ERROR';
 
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
+
+export const RESET_PRODUCTS = 'RESET_PRODUCTS';

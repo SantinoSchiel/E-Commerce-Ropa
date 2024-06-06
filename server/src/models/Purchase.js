@@ -24,11 +24,11 @@ module.exports = (sequelize) => {
         },
         cart: {
             type: DataTypes.ARRAY(DataTypes.JSON),
-            allowNull: false,
+            allowNull: true,
         },
         status: {
             type: DataTypes.ENUM("pendiente", "pagado", "cancelado"),
-            defaultValue: "pendiente",
+            defaultValue: "pagado",
             allowNull: false,
         },
         customerId: {

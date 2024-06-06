@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
+const { DB_RENDER, DB_LOCAL } = process.env;
 
 //!Crear modelos
 const CustomerModel = require("./models/customer");
@@ -11,13 +11,18 @@ const productModel = require("./models/Product");
 const adminModel = require("./models/admin");
 const PurchaseModel = require("./models/Purchase");
 
-const sequelize = new Sequelize(
-  `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
-  {
-    logging: false,
-    native: false,
-  }
-);
+const sequelize = new Sequelize(DB_LOCAL, {
+  // logging: false,
+  // native: false,
+  // dialectOptions: {
+  //   ssl: {
+  //     require: true,
+  //     rejectUnauthorized: false,
+  //   },
+  // },
+  logging: false, native: false
+});
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

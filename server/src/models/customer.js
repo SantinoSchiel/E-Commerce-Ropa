@@ -10,16 +10,16 @@ const Customer = (sequelize) => {
     },
     fullname: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       unique: true
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     phone: {
       type: DataTypes.STRING,

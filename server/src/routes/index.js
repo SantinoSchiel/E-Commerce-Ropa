@@ -46,9 +46,16 @@ const putMPHandler = require('../handlers/mercadoPagoHandler/putMPHandler');
 const getAdminHandler = require('../handlers/adminHandler/getAdminHandler');
 const putAdminHandler = require('../handlers/adminHandler/putAdminHandler');
 const postAdminHandler = require('../handlers/adminHandler/postAdminHandler');
+
 const deleteCartCustomerHandler = require('../handlers/customerHandler/deleteCartCustomerHandler');
 const putCustomerFavoritesHandler = require('../handlers/customerHandler/putCustomerFavoritesHandler');
 const deleteFavoritesCustomerHandler = require('../handlers/customerHandler/deleteFavoritesCustomerHandler');
+
+const postPurchaseHandler = require('../handlers/PurchaseHandler/postPurchaseHandler');
+const getpurchaseHandler = require('../handlers/PurchaseHandler/getPurchaseHandler');
+const putPurchaseHandler = require('../handlers/PurchaseHandler/putPurchaseHandler');
+
+const postWebhook = require('../handlers/WebHook/WebHook');
 
 const router = Router();
 
@@ -68,13 +75,16 @@ router.post('/product', uploadMultipleImages, postProductHandler);
 router.get('/product', getProductHandler);
 router.put('/product/:id', uploadMultipleImages, putProductHandler);
 
-// router.post('/create-order', preferenceID);
-// router.post('/mercadopago', postMPHandler);
-// router.get('/mercadopago', getMPHandler);
-// router.put('/mercadopago/:transactionId', putMPHandler);
+router.post('/create-order', preferenceID);
 
 router.post('/admin', postAdminHandler);
 router.get('/admin', getAdminHandler);
 router.put('/admin/:id', putAdminHandler);
+
+router.post('/purchase', postPurchaseHandler);
+router.get('/purchase', getpurchaseHandler);
+router.put('/purchase/:id', putPurchaseHandler);
+
+router.post('/webhook', postWebhook);
 
 module.exports = router;

@@ -1,0 +1,40 @@
+/* SearchBar.module.css */
+.searchForm {
+    display: flex;
+    align-items: center;
+}
+  
+.searchInput {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+    padding-right: 40px;
+    margin-bottom: 1rem;
+}
+  
+.searchButton:hover {
+    background-color: #0056b3;
+}  
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+  
+.searchButton {
+    position: relative;
+    right: 3rem;
+    top: 0.2rem;
+    cursor: pointer;
+    max-width: 1.8rem;
+    max-height: 1.8rem;
+    background-color: white !important;
+    box-shadow: none !important;
+}
+  
+.searchIcon {
+    width: 1rem;
+    height: 1rem;
+    color: gray; /* Color del ícono */
+}

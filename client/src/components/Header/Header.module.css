@@ -15,10 +15,10 @@
   background-color: #f2f2f2;
 }
 
-.mainHeader li{
+.mainHeader li {
   list-style-type: none;
 }
-  
+
 .navList {
   list-style-type: none; /* Quita los estilos de lista predeterminados */
   padding: 0; /* Elimina el relleno predeterminado de la lista */
@@ -26,7 +26,7 @@
   display: inline-block; /* Hace que los botones sean elementos en línea */
   margin-right: 10px; /* Espaciado entre los botones */
 }
-  
+
 .navLink {
   text-decoration: none;
 }
@@ -43,15 +43,11 @@
   margin-left: 3rem;
 }
 
-.container {
-  display: flex;
-  align-items: center
-}
-
 .div2 {
   display: flex;
   justify-content: flex-end;
   margin-right: 1rem;
+  margin-top: 0.5rem;
 }
 
 .div2 li {
@@ -83,20 +79,97 @@
   cursor: pointer; /* Cambia el cursor al pasar sobre la imagen para indicar que es clickeable */
 }
 
- 
 .button1:active {
   color: white;
   box-shadow: 0.1rem 0.2rem #dfd9d9;
   transform: translateY(0.2rem);
 }
- 
+
 .button1:hover:not(:disabled) {
   background: rgb(239, 157, 157);
   color: white;
   text-shadow: 0 0.1rem #bcb4b4;
 }
- 
+
 .button1:disabled {
   cursor: auto;
   color: grey;
+}
+
+.logo { 
+  display: flex;
+  width: 6rem;
+  height: 3rem;
+  border-radius: 1rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownToggle {
+  background-color: #eee;
+  border: none;
+  padding: 0.4rem;
+  font-size: 1rem;
+  width: 6em;
+  border-radius: 1rem;
+  color: rgb(243, 146, 146);
+  box-shadow: 0.1rem 0.4rem #dfd9d9;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 160px;
+  top: 100%; /* Para que el menú se despliegue hacia abajo */
+  left: 0; /* Para alinear el menú con el botón */
+}
+
+.dropdown:hover .dropdownMenu {
+  display: block;
+}
+
+.dropdownItem {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  position: relative; /* Para que el submenú se alinee correctamente */
+}
+
+.subDropdownMenu {
+  display: none;
+  position:absolute;
+  left: 60%; /* Para que el submenú se despliegue hacia la izquierda */
+  top: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 160px;
+  columns: 2;
+  padding: 0.5rem;
+}
+
+.dropdownItem:hover .subDropdownMenu {
+  display: block;
+}
+
+.subDropdownItem {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+
+.subDropdownItem:hover {
+  background-color: #ddd;
 }

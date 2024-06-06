@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, getUsers } from '../../redux/actions';
 import styles from './CartPage.module.css';
 import axios from 'axios';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { Link } from 'react-router-dom';
+
+
 const URL_API = import.meta.env.VITE_URL_API;
+const PUBLIC_KEY = 'APP_USR-b9bf9934-2435-43d3-9130-8a4f5733b456';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -11,6 +16,8 @@ function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const products = useSelector(state => state.products.products);
   const productsLoading = useSelector(state => state.products.loading);
+  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+  const [preferenceId, setPreferenceId] = useState(null);
 
   const [quantities, setQuantities] = useState({});
 
@@ -18,7 +25,7 @@ function Cart() {
     if (!products.length && !productsLoading) {
       dispatch(fetchProducts());
     }
-  }, [dispatch, products, productsLoading]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +46,7 @@ function Cart() {
       }
     };
     fetchData();
-  }, [dispatch, userFromLocalStorage.id]);
+  }, []);
 
   const handleRemoveFromCart = async productId => {
     try {
@@ -115,6 +122,77 @@ function Cart() {
     }
   };
 
+  useEffect(() => {
+    initMercadoPago(PUBLIC_KEY, { locale: 'es-AR' });
+  }, []);
+
+  const createReferenceId = async () => {
+    try {
+      const productData = Object.entries(cartItems).map(([productId, quantity]) => {
+        const product = products.find(product => product.id === productId);
+        return {
+          id: product.id,
+          title: product.name,
+          unit_price: product.price,
+          quantity: quantity,
+        };
+      });
+
+      console.log(productData, 'productData');
+
+      const response = await axios.post(`${URL_API}/create-order`, {
+        products: productData
+      });
+
+      console.log(response.data, 'Response data from create-order');
+      return response.data.id;
+    } catch (error) {
+      console.error('Error creating order:', error.response ? error.response.data : error.message);
+    }
+  };
+
+
+  const handleBuyNow = async () => {
+    if (!isLoggedIn) {
+      navigate(`/login?redirect=/cart`);
+    } else {
+      const referenceId = await createReferenceId();
+      if (referenceId) {
+        setPreferenceId(referenceId);
+      }
+    }
+  };
+
+  const params = new URLSearchParams(window.location.search) || false;
+  const paymentId = params.get('payment_id') || false;
+  console.log(paymentId, 'paymentId');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (paymentId) {
+          const product = products.find(product => product.id === productId);
+          console.log(product, 'product');
+          if (!product) return null;
+
+          const amount = calculateTotalPrice();
+
+          const { data } = await axios.post(`${URL_API}/purchase`, {
+            paymentId: paymentId,
+            amount: amount,
+            customerId: userFromLocalStorage.id,
+            adminId: product.adminId,
+          });
+          console.log(data, 'dataFromhandleBuyNow');
+        }
+      } catch (error) {
+        console.error('Error handling purchase:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.cartContainer}>
       <div className={styles.productsColumn}>
@@ -132,7 +210,9 @@ function Cart() {
                     <h3 className={styles.productName}>{product.name}</h3>
                     <div className={styles.actions}>
                       <button className={styles.removeButton} onClick={() => handleMoveFromCart(productId)}>Eliminar</button>
-                      <button className={styles.buyNowButton}>Comprar ahora</button>
+                      <Link to={`/product/${productId}`}>
+                        <button className={styles.buyNowButton}>Comprar ahora</button>
+                      </Link>
                     </div>
                   </div>
                   <div className={styles.quantityControl}>
@@ -166,7 +246,15 @@ function Cart() {
           <div className={styles.summaryCard}>
             <h2>Orden de compra</h2>
             <p>Total ${calculateTotalPrice()}</p>
-            <button className={styles.checkoutButton}>Continuar compra</button>
+            <button className={styles.checkoutButton} onClick={handleBuyNow}>Continuar compra</button>
+            {preferenceId && (
+              <div className={styles.walletContainer}>
+                <Wallet
+                  initialization={{ preferenceId: preferenceId }}
+                  customization={{ texts: { valueProp: 'smart_option' } }}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>

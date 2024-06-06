@@ -7,9 +7,10 @@ const postCustomer = async function (CustomerData) {
         where: { email: CustomerData.email }, // Condición para buscar o crear un cliente basado en su correo electrónico
         defaults: {
             fullname: CustomerData.fullname, 
+            image: CustomerData.image, 
+            email: CustomerData.email,
             phone: CustomerData.phone, 
             address: CustomerData.address, 
-            image: CustomerData.image, 
             password: CustomerData.password
         }
     });

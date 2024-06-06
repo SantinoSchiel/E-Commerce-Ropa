@@ -20,8 +20,8 @@ const Form = () => {
 
   // Opciones de categorías según el género seleccionado
   const categoryOptions = {
-    hombre: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón'],
-    mujer: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón', 'Falda', 'Vestido'],
+    hombre: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón', 'Short baño', 'Short deportivo', 'Chomba', 'Jean', 'Camisa', 'Sweater', 'Campera', 'Rompeviento', 'Zapato', 'Boxer', 'Cinto', 'Accesorio', 'Joguing', 'Joguer', 'Chaleco', 'Musculosa'],
+    mujer: ['Zapatilla', 'Remera', 'Buzo', 'Pantalón', 'Falda', 'Vestido', 'Body', 'Top', 'Musculosa', 'Camisa', 'Blusa', 'Camisola', 'Jean', 'Palazo', 'Joguing', 'Short', 'Pollera','Solera', 'Blazer', 'Tapado', 'Campera', 'Camisaco', 'Chaleco', 'Accesorio', 'Bota', 'Sandalia', 'Borcego', 'Calza', 'Saco', 'Cárdigan'],
   };
 
   // Talles según género y categoría
@@ -31,6 +31,22 @@ const Form = () => {
       Remera: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
       Buzo: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
       Pantalón: ['28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58'],
+      'Short baño': ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      'Short deportivo': ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Chomba: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Jean: ['28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58'],
+      Camisa: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Sweater: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Campera: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Rompeviento: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Zapato: ['39', '40', '41', '42', '43', '44', '45'],
+      Boxer: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Cinto: ['85', '90', '95', '100', '105', '110'],
+      Accesorio: ['Talla única'],
+      Joguing: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Joguer: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Chaleco: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Musculosa: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
     },
     mujer: {
       Zapatilla: ['35', '36', '37', '38', '39', '40'],
@@ -39,6 +55,31 @@ const Form = () => {
       Pantalón: ['28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58'],
       Falda: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
       Vestido: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Body: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Top: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Blusa: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Camisola: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Palazo: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Short: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Pollera: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Solera: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Blazer: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Tapado: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Camisaco: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Buzo: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Chaleco: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+      Accesorio: ['Talla única'],
+      Bota: ['35', '36', '37', '38', '39', '40'],
+      Sandalia: ['35', '36', '37', '38', '39', '40'],
+      Borcego: ['35', '36', '37', '38', '39', '40'],
+      Musculosa: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Camisa: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Jean: ['28', '30', '32', '34', '36', '38', '40', '42', '44', '46', '48', '50', '52', '54', '56', '58'],
+      Joguing: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Cárdigan: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Saco: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+      Calza: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'],
+
     },
   };
 
@@ -76,9 +117,18 @@ const Form = () => {
       setIsSubmitted(true);
       console.log(response.data); // Manejar respuesta del servidor
 
-      // Recargar la página después de 3 segundos
+      setName('');
+      setPrice('');
+      setGender('');
+      setCategory('');
+      setSelectedSizes([]);
+      setSelectedColors([]);
+      setCurrentColor('');
+      setDescription('');
+      setImages([]);
+
       setTimeout(() => {
-        window.location.reload();
+        setIsSubmitted(false);
       }, 2000);
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
